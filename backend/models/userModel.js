@@ -9,8 +9,8 @@ const userSchema = new mongoose.Schema({
     gender: { type: String, default: 'Not Selected' },
     dob: { type: String, default: 'Not Selected' },
     password: { type: String, required: true },
-    googleId: { type: String, required: true },
+    // googleId: { type: String, required: true },
 })
 
-const userModel = mongoose.models.user || mongoose.model("user", userSchema);
+const userModel = mongoose.model("user", userSchema);
 export default userModel;

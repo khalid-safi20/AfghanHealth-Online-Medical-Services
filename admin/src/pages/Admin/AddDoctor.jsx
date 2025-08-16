@@ -6,7 +6,6 @@ import { AdminContext } from '../../context/AdminContext'
 import { AppContext } from '../../context/AppContext'
 
 const AddDoctor = () => {
-
     const [docImg, setDocImg] = useState(false)
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -73,7 +72,7 @@ const AddDoctor = () => {
     }
 
     return (
-        <form onSubmit={onSubmitHandler} className='m-5 w-full'>
+        <form onSubmit={onSubmitHandler} className='w-full m-5'>
 
             <p className='mb-3 text-lg font-medium text-[#7E60BF] '>Add Doctor</p>
 
@@ -86,29 +85,29 @@ const AddDoctor = () => {
                     <p>Upload doctor <br /> picture</p>
                 </div>
 
-                <div className='flex flex-col lg:flex-row items-start gap-10 text-gray-600'>
+                <div className='flex flex-col items-start gap-10 text-gray-600 lg:flex-row'>
 
-                    <div className='w-full lg:flex-1 flex flex-col gap-4'>
+                    <div className='flex flex-col w-full gap-4 lg:flex-1'>
 
-                        <div className='flex-1 flex flex-col gap-1'>
+                        <div className='flex flex-col flex-1 gap-1'>
                             <p>Your name</p>
-                            <input onChange={e => setName(e.target.value)} value={name} className='border rounded px-3 py-2' type="text" placeholder='Name' required />
+                            <input onChange={e => setName(e.target.value)} value={name} className='px-3 py-2 border rounded' type="text" placeholder='Name' required />
                         </div>
 
-                        <div className='flex-1 flex flex-col gap-1'>
+                        <div className='flex flex-col flex-1 gap-1'>
                             <p>Doctor Email</p>
-                            <input onChange={e => setEmail(e.target.value)} value={email} className='border rounded px-3 py-2' type="email" placeholder='Email' required />
+                            <input onChange={e => setEmail(e.target.value)} value={email} className='px-3 py-2 border rounded' type="email" placeholder='Email' required />
                         </div>
 
 
-                        <div className='flex-1 flex flex-col gap-1'>
+                        <div className='flex flex-col flex-1 gap-1'>
                             <p>Set Password</p>
-                            <input onChange={e => setPassword(e.target.value)} value={password} className='border rounded px-3 py-2' type="password" placeholder='Password' required />
+                            <input onChange={e => setPassword(e.target.value)} value={password} className='px-3 py-2 border rounded' type="password" placeholder='Password' required />
                         </div>
 
-                        <div className='flex-1 flex flex-col gap-1'>
+                        <div className='flex flex-col flex-1 gap-1'>
                             <p>Experience</p>
-                            <select onChange={e => setExperience(e.target.value)} value={experience} className='border rounded px-2 py-2' >
+                            <select onChange={e => setExperience(e.target.value)} value={experience} className='px-2 py-2 border rounded' >
                                 <option value="1 Year">1 Year</option>
                                 <option value="2 Year">2 Years</option>
                                 <option value="3 Year">3 Years</option>
@@ -121,18 +120,18 @@ const AddDoctor = () => {
                             </select>
                         </div>
 
-                        <div className='flex-1 flex flex-col gap-1'>
+                        <div className='flex flex-col flex-1 gap-1'>
                             <p>Fees</p>
-                            <input onChange={e => setFees(e.target.value)} value={fees} className='border rounded px-3 py-2' type="number" placeholder='Doctor fees' required />
+                            <input onChange={e => setFees(e.target.value)} value={fees} className='px-3 py-2 border rounded' type="number" placeholder='Doctor fees' required />
                         </div>
 
                     </div>
 
-                    <div className='w-full lg:flex-1 flex flex-col gap-4'>
+                    <div className='flex flex-col w-full gap-4 lg:flex-1'>
 
-                        <div className='flex-1 flex flex-col gap-1'>
+                        <div className='flex flex-col flex-1 gap-1'>
                             <p>Speciality</p>
-                            <select onChange={e => setSpeciality(e.target.value)} value={speciality} className='border rounded px-2 py-2 '>
+                            <select onChange={e => setSpeciality(e.target.value)} value={speciality} className='px-2 py-2 border rounded '>
                                 <option value="General physician">General physician</option>
                                 <option value="Gynecologist">Gynecologist</option>
                                 <option value="Dermatologist">Dermatologist</option>
@@ -143,15 +142,15 @@ const AddDoctor = () => {
                         </div>
 
 
-                        <div className='flex-1 flex flex-col gap-1'>
+                        <div className='flex flex-col flex-1 gap-1'>
                             <p>Degree</p>
-                            <input onChange={e => setDegree(e.target.value)} value={degree} className='border rounded px-3 py-2' type="text" placeholder='Degree' required />
+                            <input onChange={e => setDegree(e.target.value)} value={degree} className='px-3 py-2 border rounded' type="text" placeholder='Degree' required />
                         </div>
 
-                        <div className='flex-1 flex flex-col gap-1'>
+                        <div className='flex flex-col flex-1 gap-1'>
                             <p>Address</p>
-                            <input onChange={e => setAddress1(e.target.value)} value={address1} className='border rounded px-3 py-2' type="text" placeholder='Address 1' required />
-                            <input onChange={e => setAddress2(e.target.value)} value={address2} className='border rounded px-3 py-2' type="text" placeholder='Address 2' required />
+                            <input onChange={e => setAddress1(e.target.value)} value={address1} className='px-3 py-2 border rounded' type="text" placeholder='Address 1' required />
+                            <input onChange={e => setAddress2(e.target.value)} value={address2} className='px-3 py-2 border rounded' type="text" placeholder='Address 2' required />
                         </div>
 
                     </div>

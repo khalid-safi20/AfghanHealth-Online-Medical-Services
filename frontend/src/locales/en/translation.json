@@ -1,0 +1,346 @@
+{
+  "navbar": {
+    "doctors": "Doctors",
+    "hospitals": "Hospitals",
+    "aboutUs": "About Us",
+    "askAI": "Ask AI",
+    "login": "Login",
+    "logout": "Logout",
+    "myProfile": "My Profile",
+    "myAppointments": "My Appointments",
+    "joinDoctor": "Join us as a doctor",
+    "feedback":"Feedback",
+    "home":"Home"
+  },
+  "footer": {
+    "empower": "Empowering health journey at Afghanistan.",
+    "supportPrompt": "For support and queries, contact us",
+    "email": "khalidareen8@gmail.com",
+    "phone": "076 7720201",
+    "services": "Services",
+    "viewAll": "View All",
+    "company": "Company",
+    "newsletter": "Join a Newsletter",
+    "emailLabel": "Email",
+    "enterEmail": "Enter Your Email",
+    "subscribe": "Subscribe",
+    "cities": "Major Cities",
+    "address": "Jalalabad, Afghanistan",
+    "contactInfo": "Contact Info",
+    "forDoctors": "For Doctors:",
+    "forPatients": "For Patients:"
+  },
+  "services": {
+    "Hydrafacial": "Hydrafacial",
+    "Angiography": "Angiography",
+    "Gastroscopy": "Gastroscopy",
+    "Epilepsy": "Epilepsy",
+    "BehavioralTherapy": "Behavioral Therapy"
+  },
+  "company": {
+    "SickNote": "Sick Note",
+    "Ambulance": "Ambulance Service",
+    "ContactUs": "Contact Us",
+    "Blogs": "Blogs",
+    "FAQs": "FAQs",
+    "PrivacyPolicy": "Privacy Policy",
+    "Terms": "Terms"
+  },
+  "cities": {
+    "Lahore": "Kabul",
+    "Karachi": "Jalalabad",
+    "Islamabad": "Herat",
+    "Rawalpindi": "Mazar-i-Sharif",
+    "Multan": "Kandahar",
+    "Bahawalpur": "Khost",
+    "Quetta": "Kunduz",
+    "Sargodha": "Kunar",
+    "Peshawar": "Hilamand"
+  },
+  "banner": {
+  "bookAppointment": "Book Appointment",
+  "withDoctors": "With 100+ Trusted Doctors",
+  "createAccount": "Create account"
+},
+"header": {
+  "bookAppointment": "Book Appointment",
+  "withTrustedDoctors": "With Trusted Doctors",
+  "browseDoctors": "Simply browse through our extensive list of trusted doctors,",
+  "hassleFree": "schedule your appointment hassle-free.",
+  "bookBtn": "Book appointment"
+},
+"related": {
+  "title": "Related Doctors",
+  "subtitle": "Simply browse through our extensive list of trusted doctors.",
+  "available": "Available",
+  "notAvailable": "Not Available"
+},
+"speciality": {
+  "title": "Find by Speciality",
+  "subtitle": "Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free."
+},
+"topDoctors": {
+  "title": "Top Doctors to Book",
+  "subtitle": "Simply browse through our extensive list of trusted doctors.",
+  "available": "Available",
+  "notAvailable": "Not Available",
+  "more": "More"
+},
+"about": {
+  "heroTitle": "Transforming Healthcare Across Afghanistan",
+  "heroSubtitle": "Welcome to AfghanHealth — your trusted digital gateway to accessible, secure, and efficient healthcare services.",
+  "heroBtn": "Book an Appointment",
+  "whoTitle": "Who We Are",
+  "whoPara1": "AfghanHealth is a secure web-based telemedicine platform designed to improve access to healthcare services across Afghanistan, particularly in remote and underserved areas.",
+  "whoPara2": "Our aim is to empower patients by connecting them with licensed doctors through real-time consultations, appointment scheduling, and health education in Pashto, Dari, and English.",
+  "visionTitle": "Our Vision",
+  "visionDesc": "To become the most reliable and inclusive digital healthcare platform in Afghanistan, bridging the gap between patients and healthcare providers across all regions.",
+  "values": {
+    "1": { "title": "Innovation", "text": "We use the MERN stack and cutting-edge web technologies to deliver a responsive, secure, and scalable healthcare platform." },
+    "2": { "title": "Trust", "text": "Patient privacy and data security are our highest priorities. We follow encryption standards and privacy protocols to ensure confidentiality." },
+    "3": { "title": "Accessibility", "text": "Our platform is mobile-friendly, multilingual, and optimized for low-bandwidth users to ensure nationwide reach." }
+  },
+  "whyTitle": "Why Choose AfghanHealth Services?",
+  "why": {
+    "1": { "title": "Quick Appointment Booking", "text": "Schedule doctor visits effortlessly in just a few clicks from your device." },
+    "2": { "title": "Verified Doctors", "text": "All doctors are carefully screened and verified for your safety and trust." },
+    "3": { "title": "Health Education & Smart Reminders", "text": "Access medical articles in local languages and receive appointment reminders automatically." }
+  },
+  "journeyTitle": "Our Journey",
+   "timeline": {
+  "2024": {"title": "2024 – Idea Initiated", "desc": "AfghanHealth services was envisioned as a response to rural healthcare access challenges in Afghanistan."},
+  "2025a": {"title": "2025 – Development Phase","desc": "Our team began building the platform using React.js, Node.js, and MongoDB."},
+  "2025b": {"title": "2025 – National Reach", "desc": "AfghanHealth now connects patients with doctors across multiple Afghan provinces."}
+},
+"teamTitle": "Meet the Team",
+"team": {
+  "Khalid Areen": "Lead Developer",
+  "Farooq Shinwari": "Research Analyst",
+  "Hamida Momand": "UI/UX Designer"
+},
+  "testimonialTitle": "What Our Users Say",
+  "testimonials": {
+    "1": { "text": "I can now consult a doctor in my own language without leaving my home.", "author": "Zahra M., Kandahar" },
+    "2": { "text": "Finally, a platform that brings real medical help to rural villages.", "author": "Ahmad N., Badakhshan" }
+  },
+  "ctaTitle": "Take Control of Your Health Today",
+  "ctaDesc": "Join the growing number of users who trust AfghanHealth for convenient, secure, and accessible healthcare.",
+  "ctaBtn": "Create Your Free Account"
+},
+"appointment": {
+  "about": "About",
+  "fee": "Appointment fee",
+  "bookingSlots": "Booking slots",
+  "bookNow": "Book an appointment",
+  "loginToBook": "Login to book appointment"
+},
+"days": {
+  "SUN": "Sun",
+  "MON": "Mon",
+  "TUE": "Tue",
+  "WED": "Wed",
+  "THU": "Thu",
+  "FRI": "Fri",
+  "SAT": "Sat"
+},
+"doctors": {
+  "findTitle": "Find Your Specialist",
+  "findSubtitle": "Book appointments with trusted doctors across various specialties.",
+  "specialties": "Specialties",
+  "available": "Available",
+  "notAvailable": "Not Available",
+  "bookNow": "Book Appointment",
+  "noDoctors": "No doctors found for this specialty."
+},
+"specialities": {
+  "General physician": "General Physician",
+  "Gynecologist": "Gynecologist",
+  "Dermatologist": "Dermatologist",
+  "Pediatricians": "Pediatricians",
+  "Neurologist": "Neurologist",
+  "Gastroenterologist": "Gastroenterologist"
+},
+"login": {
+    "createAccount": "Create Account",
+    "login": "Login",
+    "please": "Please",
+    "signUp": "sign up",
+    "logIn": "log in",
+    "toBook": "to book an appointment",
+    "fullName": "Full Name",
+    "email": "Email",
+    "password": "Password",
+    "googleSuccess": "Signed in successfully with Google!",
+    "googleError": "Google sign-in failed!",
+    "alreadyAccount": "Already have an account?",
+    "loginHere": "Login here",
+    "newAccount": "Create a new account?",
+    "clickHere": "Click here"
+  },
+  "appointment": {
+    "myAppointments": "My appointments",
+    "address": "Address",
+    "dateTime": "Date & Time",
+    "payOnline": "Pay Online",
+    "paid": "Paid",
+    "completed": "Completed",
+    "cancel": "Cancel appointment",
+    "cancelled": "Appointment cancelled",
+    "paymentTitle": "Appointment Payment",
+    "paymentDesc": "Appointment Payment"
+  },
+  "months": {
+    "jan": "Jan",
+    "feb": "Feb",
+    "mar": "Mar",
+    "apr": "Apr",
+    "may": "May",
+    "jun": "Jun",
+    "jul": "Jul",
+    "aug": "Aug",
+    "sep": "Sep",
+    "oct": "Oct",
+    "nov": "Nov",
+    "dec": "Dec"
+  },
+  "profile": {
+  "imageAlt": "Profile picture",
+  "change": "Change",
+  "edit": "Edit",
+  "save": "Save Info",
+  "contactInfo": "Contact Information",
+  "phone": "Phone",
+  "address": "Address",
+  "basicInfo": "Basic Information",
+  "gender": "Gender",
+  "notSelected": "Not Selected",
+  "male": "Male",
+  "female": "Female",
+  "birthday": "Birthday"
+},
+"ai": {
+  "title": "Doctor AI",
+  "darkMode": "🌙 Dark Mode",
+  "lightMode": "☀️ Light Mode",
+  "clear": "Clear Chat",
+  "back": "Back to Home",
+  "welcome": "Welcome to Doctor AI! 👩‍⚕️",
+  "subtitle": "Type your health-related questions below, and I'll assist you with expert advice.",
+  "thinking": "Thinking...",
+  "send": "Send",
+  "placeholder": "Ask anything...",
+  "copy": "Copy",
+  "copied": "Copied to clipboard!",
+  "copyFailed": "Failed to copy: ",
+  "error": "Sorry - Something went wrong. Please try again!"
+},
+ "home": {
+    "welcome": "Welcome, Guest!",
+    "difficulty": "Having difficulty in selecting the right consultant?",
+    "hero1": "Find and Book",
+    "heroHighlight": "the Best Doctors",
+    "hero2": "now!",
+    "selectCity": "Select City",
+    "searchPlaceholder": "Search by Doctor Name, Hospital, Disease, Symptoms",
+    "mentalCheckTitle": "A health check for your mental well-being.",
+    "mentalCheckDesc": "Enhance your overall quality of life by proactively addressing and nurturing your mental well-being. Our dedicated psychiatry and psychology services are here to support you.",
+    "bookAppointment": "Book Appointment",
+    "symptomTitle": "Book the best doctors now",
+    "symptomSubtitle": "by symptoms & diseases",
+    "symptomDesc": "We offer comprehensive medical care, addressing a variety of conditions from infectious diseases to mental health concerns. Our goal is to treat symptoms effectively and enhance overall well-being of our patients.",
+    "stepsTitle": "How to book an appointment ?",
+    "findDoctor": "Find A Doctor"          
+  },
+  "homes": {
+  "stepsTitle": "How to book an appointment?",
+  "steps": [
+    {
+      "title": "Search",
+      "desc": "Explore our diverse range of healthcare professionals by specialty, location, or other preferences."
+    },
+    {
+      "title": "Select",
+      "desc": "Choose the doctor that best fits your needs by reviewing their profiles, expertise, and patient reviews"
+    },
+    {
+      "title": "Book",
+      "desc": "Pick a convenient date and time from the available slots for an in-clinic or virtual appointment."
+    }
+  ],
+  "findDoctor": "Find A Doctor",
+   "testimonialsTitle": "Patient testimonials",
+  "readMore": "Read More",
+  "testimonials": [
+    {
+      "name": "Ali Mohammad Mohmand",
+      "image": "31.png",
+      "review": "I had an appointment through Apka Muaalij platform 3 days ago. Appointment was easy and doctor was very professional."
+    },
+    {
+      "name": "Alena Shinwari",
+      "image": "32.png",
+      "review": "Recently I booked my appointment to a dermatologist. He is very kind, professional and listens carefully to concerns."
+    },
+    {
+      "name": "Aliza Safi",
+      "image": "36.png",
+      "review": "I have found an excellent neurosurgeon who transformed my life. Their professionalism and dedication was outstanding."
+    }
+  ],
+   "blogsTitle": "Blogs",
+  "viewAll": "View all >",
+  "blogs": [
+    { "title": "Lifestyle", "image": "27.png" },
+    { "title": "Women's Health", "image": "28.png" },
+    { "title": "Mental Health", "image": "29.png" },
+    { "title": "Diet And Weightloss", "image": "30.png" }
+  ],
+   "symptoms": [
+    { "title": "Fever", "desc": "Feeling hot or having a high temperature when you're sick.", "icon": "10.png" },
+    { "title": "Chest Pain", "desc": "Pain or pressure in your chest, around neck and left shoulder like someone is squeezing it.", "icon": "11.png" },
+    { "title": "Abdominal Pain", "desc": "Pain or cramps in your tummy, making it feel uncomfortable.", "icon": "12.png" },
+    { "title": "Skin Rash", "desc": "Redness, itchiness, or bumps on your skin, making it feel irritated.", "icon": "14.png" },
+    { "title": "Dengue Fever", "desc": "Fever, severe headache, muscle pain, and rash caused by mosquito bites.", "icon": "15.png" },
+    { "title": "Heart Disease", "desc": "Heart problems make you feel chest pain, short of breath, or tired.", "icon": "16.png" },
+    { "title": "Diabetes", "desc": "Having too much sugar in your blood, making you thirsty and tired.", "icon": "17.png" },
+    { "title": "Gastritis", "desc": "Stomach pain, feeling sick, and indigestion from eating certain foods.", "icon": "18.png" },
+    { "title": "Vaginal Infection", "desc": "Discomfort or itching in your private area, with unusual discharge.", "icon": "19.png" },
+    { "title": "Cancer", "desc": "Tumor or unusual growth at any part of the body. Pain in that area or feeling of discomfort.", "icon": "20.png" }
+  ],
+   "symptomTitle": "Book the best doctors now",
+  "symptomSubtitle": "by symptoms & diseases",
+  "symptomDesc": "We offer comprehensive medical care, addressing a variety of conditions from infectious diseases to mental health concerns. Our goal is to treat symptoms effectively and enhance overall well-being of our patients.",
+   "mentalTitle": "A health check for your mental well-being.",
+  "mentalDesc": "Enhance your overall quality of life by proactively addressing and nurturing your mental well-being. Our dedicated psychiatry and psychology services are here to support you.",
+  "bookNow": "Book Appointment",
+   "services": {
+    "onlineNow": {
+      "title": "Online Now",
+      "desc": "Select-Pay-Connect"
+    },
+    "inClinic": {
+      "title": "In-Clinic Visit",
+      "desc": "Book Appointment"
+    },
+    "onlineConsult": {
+      "title": "Online Consultation",
+      "desc": "PMC Verified Doctors"
+    },
+    "sickNote": {
+      "title": "Sick Note",
+      "desc": "Online medical certificate"
+    }
+  }
+},
+"feedback": {
+  "title": "Feedback",
+  "subtitle": "We value your feedback. Please let us know your thoughts.",
+  "name": "Your Name",
+  "email": "Your Email",
+  "message": "Your Feedback",
+  "submit": "Submit Feedback",
+  "required": "All fields are required",
+  "success": "Feedback submitted",
+  "error": "Something went wrong. Please try again."
+}
+}

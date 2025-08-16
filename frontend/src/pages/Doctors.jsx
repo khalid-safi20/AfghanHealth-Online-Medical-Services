@@ -1,59 +1,148 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { AppContext } from '../context/AppContext'
-import { useNavigate, useParams } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react';
+import { AppContext } from '../context/AppContext';
+import { doctors as staticDoctors } from '../assets/assets';
+import { useNavigate, useParams } from 'react-router-dom';
+import { FiUser, FiHeart, FiSmile, FiActivity, FiTarget, FiFilter } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
 
 const Doctors = () => {
-
-  const { speciality } = useParams()
-
-  const [filterDoc, setFilterDoc] = useState([])
-  const [showFilter, setShowFilter] = useState(false)
+  const { t } = useTranslation();
+  const { speciality } = useParams();
+  const [filteredDocs, setFilteredDocs] = useState([]);
   const navigate = useNavigate();
+  const { doctors: contextDoctors } = useContext(AppContext);
 
-  const { doctors } = useContext(AppContext)
+  const specialities = [
+    { label: 'General Physician', icon: <FiUser /> },
+    { label: 'Gynecologist', icon: <FiHeart /> },
+    { label: 'Dermatologist', icon: <FiSmile /> },
+    { label: 'Pediatricians', icon: <FiActivity /> },
+    { label: 'Neurologist', icon: <FiTarget /> },
+    { label: 'Gastroenterologist', icon: <FiUser /> },
+  ];
 
-  const applyFilter = () => {
-    if (speciality) {
-      setFilterDoc(doctors.filter(doc => doc.speciality === speciality))
-    } else {
-      setFilterDoc(doctors)
-    }
-  }
+  // Helper to normalize availability:
+  // - Respect doc.available or doc.isAvailable if present
+  // - Otherwise, alternate true/false so there is a mix
+  const applyAvailabilityFallback = (list) =>
+    list.map((doc, i) => {
+      const explicit =
+        typeof doc.available === 'boolean'
+          ? doc.available
+          : typeof doc.isAvailable === 'boolean'
+          ? doc.isAvailable
+          : null;
+
+      return {
+        ...doc,
+        available: explicit !== null ? explicit : i % 2 === 0, // alternate if missing
+      };
+    });
 
   useEffect(() => {
-    applyFilter()
-  }, [doctors, speciality])
+    // Merge static + dynamic doctors
+    const baseList = [
+      ...staticDoctors,
+      ...(Array.isArray(contextDoctors) ? contextDoctors : []),
+    ];
+
+    const normalized = applyAvailabilityFallback(baseList);
+
+    if (speciality) {
+      const matches = normalized.filter(
+        (doc) =>
+          doc.speciality &&
+          doc.speciality.toLowerCase() === speciality.toLowerCase()
+      );
+
+      // If no match, show all
+      setFilteredDocs(matches.length > 0 ? applyAvailabilityFallback(matches) : normalized);
+    } else {
+      setFilteredDocs(normalized);
+    }
+  }, [speciality, contextDoctors]);
 
   return (
-    <div>
-      <p className='text-gray-600'>Browse through the doctors specialist.</p>
-      <div className='flex flex-col sm:flex-row items-start gap-5 mt-5'>
-        <button onClick={() => setShowFilter(!showFilter)} className={`py-1 px-3 border rounded text-sm  transition-all sm:hidden ${showFilter ? 'bg-primary text-white' : ''}`}>Filters</button>
-        <div className={`flex-col gap-4 text-sm text-gray-600 ${showFilter ? 'flex' : 'hidden sm:flex'}`}>
-          <p onClick={() => speciality === 'General physician' ? navigate('/doctors') : navigate('/doctors/General physician')} className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-[#7E60BF] rounded transition-all cursor-pointer ${speciality === 'General physician' ? 'bg-[#F5EFFF] text-black ' : ''}`}>General physician</p>
-          <p onClick={() => speciality === 'Gynecologist' ? navigate('/doctors') : navigate('/doctors/Gynecologist')} className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border border-[#7E60BF] rounded transition-all cursor-pointer ${speciality === 'Gynecologist' ? 'bg-[#F5EFFF] text-black ' : ''}`}>Gynecologist</p>
-          <p onClick={() => speciality === 'Dermatologist' ? navigate('/doctors') : navigate('/doctors/Dermatologist')} className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-[#7E60BF] rounded transition-all cursor-pointer ${speciality === 'Dermatologist' ? 'bg-[#F5EFFF] text-black ' : ''}`}>Dermatologist</p>
-          <p onClick={() => speciality === 'Pediatricians' ? navigate('/doctors') : navigate('/doctors/Pediatricians')} className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-[#7E60BF] rounded transition-all cursor-pointer ${speciality === 'Pediatricians' ? 'bg-[#F5EFFF] text-black ' : ''}`}>Pediatricians</p>
-          <p onClick={() => speciality === 'Neurologist' ? navigate('/doctors') : navigate('/doctors/Neurologist')} className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-[#7E60BF] rounded transition-all cursor-pointer ${speciality === 'Neurologist' ? 'bg-[#F5EFFF] text-black ' : ''}`}>Neurologist</p>
-          <p onClick={() => speciality === 'Gastroenterologist' ? navigate('/doctors') : navigate('/doctors/Gastroenterologist')} className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-[#7E60BF] rounded transition-all cursor-pointer ${speciality === 'Gastroenterologist' ? 'bg-[#F5EFFF] text-black ' : ''}`}>Gastroenterologist</p>
-        </div>
-        <div className='w-full grid grid-cols-auto gap-4 gap-y-6'>
-          {filterDoc.map((item, index) => (
-            <div onClick={() => { navigate(`/appointment/${item._id}`); scrollTo(0, 0) }} className='border border-[#7E60BF] rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500' key={index}>
-              <img className='bg-[#F5EFFF]' src={item.image} alt="" />
-              <div className='p-4'>
-                <div className={`flex items-center gap-2 text-sm text-center ${item.available ? 'text-green-500' : "text-gray-500"}`}>
-                  <p className={`w-2 h-2 rounded-full ${item.available ? 'bg-green-500' : "bg-gray-500"}`}></p><p>{item.available ? 'Available' : "Not Available"}</p>
+    <div className="bg-[#f5f9fc] min-h-screen py-12 px-6 md:px-16">
+      {/* Header */}
+      <div className="mb-12 text-center">
+        <h1 className="text-4xl font-bold text-sky-700">{t('doctors.findTitle')}</h1>
+        <p className="mt-2 text-sm text-gray-500">{t('doctors.findSubtitle')}</p>
+      </div>
+
+      {/* Content */}
+      <div className="flex flex-col gap-10 lg:flex-row">
+        {/* Sidebar */}
+        <aside className="w-full lg:w-64">
+          <div className="sticky p-4 bg-white shadow-md top-20 rounded-xl">
+            <h3 className="flex items-center gap-2 mb-4 text-lg font-semibold text-gray-700">
+              <FiFilter /> {t('doctors.specialties')}
+            </h3>
+            <div className="flex flex-col space-y-2">
+              {specialities.map(({ label, icon }, index) => {
+                const isActive =
+                  speciality?.toLowerCase() === label.toLowerCase();
+                return (
+                  <button
+                    key={index}
+                    onClick={() =>
+                      isActive ? navigate('/doctors') : navigate(`/doctors/${label}`)
+                    }
+                    className={`flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium transition ${
+                      isActive
+                        ? 'bg-sky-100 text-sky-700 border border-sky-400'
+                        : 'bg-gray-50 text-gray-600 hover:bg-sky-50'
+                    }`}
+                  >
+                    <span className="text-lg">{icon}</span>
+                    {t(`specialities.${label}`, label)}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </aside>
+
+        {/* Main Cards */}
+        <main className="grid flex-1 grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          {filteredDocs.map((doc, idx) => (
+            <div
+              key={doc._id ?? idx}
+              onClick={() => {
+                navigate(`/appointment/${doc._id}`);
+                window.scrollTo(0, 0);
+              }}
+              className="transition transform bg-white shadow-md cursor-pointer rounded-xl hover:shadow-lg hover:-translate-y-1"
+            >
+              <img
+                src={doc.image || '/default-avatar.png'}
+                alt={doc.name}
+                className="object-cover w-full h-44 rounded-t-xl"
+              />
+              <div className="p-5">
+                <div className="flex items-center gap-2 mb-2 text-sm">
+                  <span
+                    className={`w-2.5 h-2.5 rounded-full ${
+                      doc.available ? 'bg-green-500' : 'bg-gray-400'
+                    }`}
+                  />
+                  <span className={doc.available ? 'text-green-600' : 'text-gray-500'}>
+                    {doc.available ? t('doctors.available') : t('doctors.notAvailable')}
+                  </span>
                 </div>
-                <p className='text-[#7E60BF] text-lg font-medium'>{item.name}</p>
-                <p className='text-[#5C5C5C] text-sm'>{item.speciality}</p>
+                <h3 className="text-lg font-semibold text-sky-800">{doc.name}</h3>
+                <p className="text-sm text-gray-600">{doc.speciality}</p>
+
+                <button className="w-full py-2 mt-4 text-sm font-medium text-white transition rounded bg-sky-600 hover:bg-sky-700">
+                  {t('doctors.bookNow')}
+                </button>
               </div>
             </div>
           ))}
-        </div>
+        </main>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Doctors
+export default Doctors;

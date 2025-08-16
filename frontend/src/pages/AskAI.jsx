@@ -1,25 +1,27 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import ReactMarkdown from "react-markdown";
+import { useTranslation } from "react-i18next";
+
+// Gemini API Key
+const genAI = new GoogleGenerativeAI("AIzaSyATz7JlfswVng7wKb-yqkN6_ISyZuzS0bs");
 
 const AskAI = () => {
   const [chatHistory, setChatHistory] = useState([]);
   const [question, setQuestion] = useState("");
   const [generatingAnswer, setGeneratingAnswer] = useState(false);
-  const [theme, setTheme] = useState("light"); // Light or dark mode
-
-  const chatContainerRef = useRef(null);
+  const [theme, setTheme] = useState("light");
+  const { t } = useTranslation();
   const navigate = useNavigate();
+  const chatContainerRef = useRef(null);
 
   useEffect(() => {
-    // Auto-scroll to bottom when chat updates
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [chatHistory, generatingAnswer]);
 
-  // Persist chat history using localStorage
   useEffect(() => {
     const savedHistory = JSON.parse(localStorage.getItem("chatHistory")) || [];
     setChatHistory(savedHistory);
@@ -30,7 +32,7 @@ const AskAI = () => {
   }, [chatHistory]);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
   const clearChatHistory = () => {
@@ -38,42 +40,44 @@ const AskAI = () => {
     localStorage.removeItem("chatHistory");
   };
 
-  async function generateAnswer(e) {
-    e.preventDefault();
-    if (!question.trim()) return;
+ async function generateAnswer(e) {
+  e.preventDefault();
+  if (!question.trim()) return;
 
-    setGeneratingAnswer(true);
-    const currentQuestion = question;
-    setQuestion(""); // Clear input immediately after sending
+  setGeneratingAnswer(true);
+  const currentQuestion = question;
+  setQuestion("");
 
-    // Add user question to chat history
-    setChatHistory((prev) => [...prev, { type: "user", content: currentQuestion }]);
+  setChatHistory((prev) => [...prev, { type: "user", content: currentQuestion }]);
 
-    try {
-      const response = await axios({
-        url: `---------------your API key here---------------------`,
-        method: "post",
-        data: {
-          contents: [{ parts: [{ text: question }] }],
-        },
-      });
+  try {
+    const genAI = new GoogleGenerativeAI("AIzaSyATz7JlfswVng7wKb-yqkN6_ISyZuzS0bs");
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
-      const aiResponse = response.data.candidates[0].content.parts[0].text;
-      setChatHistory((prev) => [...prev, { type: "ai", content: aiResponse }]);
-    } catch (error) {
-      console.error(error);
-      setChatHistory((prev) => [
-        ...prev,
-        { type: "ai", content: "Sorry - Something went wrong. Please try again!" },
-      ]);
-    }
-    setGeneratingAnswer(false);
+    const result = await model.generateContent([currentQuestion]);
+    const response = await result.response;
+    const text = response.text();
+
+    setChatHistory((prev) => [...prev, { type: "ai", content: text }]);
+  } catch (error) {
+    console.error("Gemini AI Error:", error);
+    setChatHistory((prev) => [
+      ...prev,
+      {
+        type: "ai",
+        content: "⚠️ Gemini AI Error. Please try again.",
+      },
+    ]);
   }
+
+  setGeneratingAnswer(false);
+}
+
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text).then(
-      () => alert("Copied to clipboard!"),
-      (err) => alert("Failed to copy: " + err)
+      () => alert(t("ai.copied") || "Copied!"),
+      (err) => alert(t("ai.copyFailed") + err)
     );
   };
 
@@ -96,81 +100,41 @@ const AskAI = () => {
 
   return (
     <div className={`fixed inset-0 ${currentTheme.background}`}>
-      <div className="h-full max-w-4xl mx-auto flex flex-col p-3">
-        {/* Header with Theme Toggle */}
-        <header className="flex justify-between items-center py-4">
-          <h1
-            className="text-4xl font-bold"
-            style={{ color: "#7E60BF", transition: "color 0.3s" }}
-          >
-            Doctor AI
-          </h1>
+      <div className="flex flex-col h-full max-w-4xl p-3 mx-auto">
+        <header className="flex items-center justify-between py-4">
+          <h1 className="text-4xl font-bold text-[#7E60BF]">{t('ai.title')}</h1>
           <div className="flex gap-3">
-            <button
-              onClick={toggleTheme}
-              className={`px-4 py-2 rounded-lg ${currentTheme.chatBubble} hover:opacity-80`}
-            >
-              {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+            <button onClick={toggleTheme} className={`px-4 py-2 rounded-lg ${currentTheme.chatBubble}`}>
+              {theme === "light" ? t('ai.darkMode') : t('ai.lightMode')}
             </button>
-            <button
-              onClick={clearChatHistory}
-              className={`px-4 py-2 rounded-lg ${currentTheme.chatBubble} hover:opacity-80`}
-            >
-              Clear Chat
+            <button onClick={clearChatHistory} className={`px-4 py-2 rounded-lg ${currentTheme.chatBubble}`}>
+              {t('ai.clear')}
             </button>
-            <button
-              onClick={() => navigate("/")}
-              className="px-4 py-2 rounded-lg text-white"
-              style={{ backgroundColor: "#7E60BF" }}
-            >
-              Back to Home
+            <button onClick={() => navigate("/")} className="px-4 py-2 text-white rounded-lg" style={{ backgroundColor: "#7E60BF" }}>
+              {t('ai.back')}
             </button>
           </div>
         </header>
 
-        {/* Chat Container */}
-        <div
-          ref={chatContainerRef}
-          className={`flex-1 overflow-y-auto mb-4 rounded-lg shadow-lg p-4 hide-scrollbar ${currentTheme.chatBubble}`}
-        >
+        <div ref={chatContainerRef} className={`flex-1 overflow-y-auto mb-4 rounded-lg shadow-lg p-4 ${currentTheme.chatBubble}`}>
           {chatHistory.length === 0 ? (
-            <div className="h-full flex items-center justify-center text-center">
-              <div
-                className="rounded-xl p-8 max-w-2xl"
-                style={{ backgroundColor: theme === "light" ? "#F5EFFF" : "#2D3748" }}
-              >
-                <h2
-                  className="text-2xl font-bold"
-                  style={{ color: "#7E60BF", background: "bg-[#F5EFFF]" }}
-                >
-                  Welcome to Doctor AI! 👩‍⚕️
-                </h2>
-                <p className="mt-4 text-sm">
-                  Type your health-related questions below, and I'll assist you with expert advice.
-                </p>
+            <div className="flex items-center justify-center h-full text-center">
+              <div className="max-w-2xl p-8 rounded-xl" style={{ backgroundColor: theme === "light" ? "#F5EFFF" : "#2D3748" }}>
+                <h2 className="text-2xl font-bold text-[#7E60BF]">{t('ai.welcome')}</h2>
+                <p className="mt-4 text-sm">{t('ai.subtitle')}</p>
               </div>
             </div>
           ) : (
             chatHistory.map((chat, index) => (
-              <div
-                key={index}
-                className={`flex items-start mb-4 ${chat.type === "user" ? "justify-end" : ""}`}
-              >
-                <div
-                  className={`inline-block max-w-[80%] p-3 rounded-lg shadow-md ${
-                    chat.type === "user"
-                      ? "bg-[#7E60BF] text-white rounded-br-none"
-                      : currentTheme.chatBubble + " rounded-bl-none"
-                  }`}
-                >
+              <div key={index} className={`flex items-start mb-4 ${chat.type === "user" ? "justify-end" : ""}`}>
+                <div className={`inline-block max-w-[80%] p-3 rounded-lg shadow-md ${
+                  chat.type === "user" ? "bg-[#7E60BF] text-white rounded-br-none" : `${currentTheme.chatBubble} rounded-bl-none`
+                }`}>
                   <ReactMarkdown>{chat.content}</ReactMarkdown>
                   {chat.type === "ai" && (
                     <div className="mt-2">
-                      <button
-                        onClick={() => copyToClipboard(chat.content)}
-                        className="text-xs text-blue-500 hover:underline"
-                      >
-                        📋 Copy
+                      <button onClick={() => copyToClipboard(chat.content)} className="text-xs text-blue-500 hover:underline">
+                        📋 {t('ai.copy')}
                       </button>
                     </div>
                   )}
@@ -180,25 +144,21 @@ const AskAI = () => {
           )}
           {generatingAnswer && (
             <div className="flex items-start">
-              <div className="inline-block bg-gray-100 p-3 rounded-lg animate-pulse">
-                Thinking...
+              <div className="inline-block p-3 bg-gray-100 rounded-lg animate-pulse">
+                {t('ai.thinking')}
               </div>
             </div>
           )}
         </div>
 
-        {/* Input Form */}
-        <form onSubmit={generateAnswer} className="rounded-lg shadow-lg p-4">
+        <form onSubmit={generateAnswer} className="p-4 rounded-lg shadow-lg">
           <div className="flex gap-2">
             <textarea
               required
-              className={`flex-1 rounded p-3 focus:ring-2 resize-none border-2 border-[#7E60BF]  ${currentTheme.input}`}
-              style={{
-                borderColor: theme === "light" ? "#7E60BF" : "#7E60BF",
-              }}
+              className={`flex-1 rounded p-3 focus:ring-2 resize-none border-2 border-[#7E60BF] ${currentTheme.input}`}
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
-              placeholder="Ask anything..."
+              placeholder={t('ai.placeholder')}
               rows="2"
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
@@ -213,7 +173,7 @@ const AskAI = () => {
               style={{ backgroundColor: "#7E60BF", color: "#ffffff" }}
               disabled={generatingAnswer}
             >
-              Send
+              {t('ai.send')}
             </button>
           </div>
         </form>
